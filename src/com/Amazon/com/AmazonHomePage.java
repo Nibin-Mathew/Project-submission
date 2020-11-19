@@ -1,6 +1,10 @@
 package com.Amazon.com;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.print.DocFlavor.STRING;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,46 +14,32 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class AmazonHomePage extends Baseclass {
-	private WebDriver driver;
-	public static final String URL = "https://www.amazon.co.ca/";
-
-	public AmazonHomePage(WebDriver driver) {
-		super(driver);
-		this.driver = driver;
-	}
+public class AmazonHomePage {
 
 	// Object repository for AmazonHomepage
 	@FindBy(how = How.CSS, using = "#searchDropdownBox")
-	private WebElement dropselect;
+	private static WebElement departmentSelectBox;
 	@FindBy(how = How.ID, using = "twotabsearchtextbox")
-	private WebElement Searchbox;
+	private static WebElement Searchbox;
 	@FindBy(how = How.CLASS_NAME, using = "nav-input")
-	private WebElement SearchButton;
-	@FindBy(how = How.TAG_NAME, using = "h2")
-	public static List<WebElement> TotalImages;
+	private static WebElement SearchButton;	
+	@FindBy(how = How.CLASS_NAME, using = "a-icon.*")
+    List<WebElement> Totalproducts;
 
-	@Override
-	public String getPageURL() {
-		return URL;
+	public static String selectbyvalue(String value){
+		Select objSelect=new Select(departmentSelectBox);
+		objSelect.selectByVisibleText(value);
+		System.out.println("The Department item is "+value);
+		return value;
+		
 	}
-
-	public String sendText(String text) {
+	public static String sendText(String text) {
 		Searchbox.sendKeys(text);
-		System.out.println(text);
+		System.out.println("The Search item is "+text);
 		SearchButton.submit();
 		return text;
 	}
 
-	public List<WebElement> printsearchitem() {
-		// print the product details
-		System.out.println(TotalImages.size());
-		for(int i=1;i<TotalImages.size();i++){
-			System.out.println(TotalImages.get(i).getText());
-		}
-		return TotalImages;
-		
-		
-		
-	}}
+	
+	}
  

@@ -2,17 +2,23 @@ package JDBCconnect;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import java.net.URL;
 import java.net.URLClassLoader;
 import com.Amazon.com.AmazonHomePage;
+import com.Amazon.com.SearchResults;
 import com.mysql.jdbc.Driver;
 
 public class DBOperations {
 	private static WebDriver driver;
+	SearchResults sr = PageFactory.initElements(driver, SearchResults.class);
 	private static final String db = "jdbc:mysql://localhost:3306/amazon";
 	private static final String dbserver = "jdbc:mysql://localhost:3306";
 	private static final String user = "root";
@@ -109,18 +115,12 @@ public class DBOperations {
 
 	}
 
-	public void insertRecord() {
-		// hardcoding - run more than once and see what happens
-		// String query2 = "Insert into coolthings.cars_tbl (car_regn,
-		// car_model, car_color, car_mileage) \n" +
-		// "values ('GA02 BB 1234','Lotus', 'Black', 2700)";
-
-		// Prepared statement
+	public void insertRecord(ArrayList<String> Str) {
 		String query2 = "Insert into amazon.searchresults_tbl (Sr_no,results_tbl) values (?,?)";
 		//Scanner s2 = new Scanner(System.in);
 		
+		try{
 
-		try {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
@@ -139,6 +139,9 @@ public class DBOperations {
 			pstmt.setString(3, s2.nextLine());
 			System.out.println("Kms run:");
 			pstmt.setInt(4, s2.nextInt());*/
+			
+		
+			
 
 			int ret = pstmt.executeUpdate();
 			if (ret == 1) {

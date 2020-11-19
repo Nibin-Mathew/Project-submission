@@ -7,13 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class Signin extends Baseclass  {
+public class Signin  {
 
 	private String URL="https://www.amazon.ca/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.ca%2F%3Fref_%3Dnav_custrec_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=caflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&";
 	private WebDriver driver;
 
 	public Signin(WebDriver driver) {
-		super(driver);
 		this.driver=driver;
 	}
 	@FindBy(how = How.ID, using = "ap_email")
@@ -28,11 +27,6 @@ public class Signin extends Baseclass  {
 	private WebElement Accountlist;
 	@FindBy(how = How.CSS, using ="#authportal-main-section > div:nth-child(2) > div > div.a-section > form > div > div > div > h1")
 	private WebElement SigninPage;
-	@Override
-	public String getPageURL() {
-		
-		return  URL.trim();
-	}
 
 	public void Signin(){
 		Accountlist.click();
